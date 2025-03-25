@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Truckers & Shippers App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Sign-in Section -->
+    <div id="authSection" class="centered">
+        <h2>Welcome to Truckers & Shippers App</h2>
+        <p>Sign in to continue</p>
+        <button id="emailLoginBtn">Sign in with Email</button>
+        <button id="otpLoginBtn">Sign in with Phone (OTP)</button>
+    </div>
+
+    <!-- User Selection Section -->
+    <div id="userSelectionSection" class="hidden">
+        <h2>Select User Type</h2>
+        <button id="truckDriverBtn">Truck Driver</button>
+        <button id="shipperBtn">Shipper</button>
+    </div>
+
+    <!-- Dashboard Section -->
+    <div id="dashboardSection" class="hidden">
+        <h2>Dashboard</h2>
+        <div id="availableLoads">Available Loads for Truck Drivers</div>
+        <div id="availableTrucks">Available Trucks for Shippers</div>
+        <button id="profileBtn">Profile & Settings</button>
+        <button id="tripHistoryBtn">Trip History</button>
+        <button id="earningsBtn">Earnings Tracker</button>
+    </div>
+
+    <!-- Profile & Settings Section -->
+    <div id="profileSection" class="hidden">
+        <h2>Profile & Settings</h2>
+        <label for="truckDetails">Truck Details:</label>
+        <input type="text" id="truckDetails" placeholder="Enter truck details...">
+        <button id="saveProfileBtn">Save</button>
+    </div>
+
+    <!-- Earnings Tracker Section -->
+    <div id="earningsSection" class="hidden">
+        <h2>Earnings Tracker</h2>
+        <p id="earningsInfo">Total Earnings: $0</p>
+    </div>
+
+    <!-- Trip History Section -->
+    <div id="tripHistorySection" class="hidden">
+        <h2>Trip History</h2>
+        <ul id="tripHistoryList">
+            <li>Trip 1 - Completed</li>
+            <li>Trip 2 - Completed</li>
+        </ul>
+    </div>
+
+    <!-- Map Section -->
+    <div id="mapSection">
+        <h3>Track Your Route</h3>
+        <div id="map" style="height: 300px; border-radius: 8px;"></div>
+    </div>
+
+    <!-- Google Maps API for Route Optimization -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places"></script>
+    <script src="app.js"></script>
+</body>
+</html>
