@@ -1,68 +1,515 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Truckers & Shippers App</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <!-- Sign-in Section -->
-    <div id="authSection" class="centered">
-        <h2>Welcome to Truckers & Shippers App</h2>
-        <p>Sign in to continue</p>
-        <button id="emailLoginBtn">Sign in with Email</button>
-        <button id="otpLoginBtn">Sign in with Phone (OTP)</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LoadMatch - Smart Truck Rental Platform</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div class="hero-content">
+          <h1>Smart Logistics, Simplified</h1>
+          <p class="hero-subtitle">
+            Connect with empty trucks and optimize your logistics operations
+          </p>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <i class="fas fa-truck"></i>
+              <span class="stat-number">10,000+</span>
+              <span class="stat-label">Active Trucks</span>
+            </div>
+            <div class="stat-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span class="stat-number">50+</span>
+              <span class="stat-label">Cities</span>
+            </div>
+            <div class="stat-item">
+              <i class="fas fa-users"></i>
+              <span class="stat-number">5,000+</span>
+              <span class="stat-label">Happy Customers</span>
+            </div>
+          </div>
+          <button class="cta-button" id="getStartedBtn">
+            Get Started
+            <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+        <div class="hero-image">
+          <img
+            src="pngkey.com-indian-truck-png-2592958.png"
+            alt="Indian Truck"
+            class="hero-truck-image"
+          />
+          <div class="hero-image-overlay">
+            <div class="truck-info">
+              <i class="fas fa-truck-moving"></i>
+              <span>24/7 Truck Tracking</span>
+            </div>
+            <div class="truck-info">
+              <i class="fas fa-shield-alt"></i>
+              <span>Secure Payments</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Login Modal -->
+      <div id="loginModal" class="modal hidden">
+        <div class="modal-content">
+          <span class="close-modal">&times;</span>
+          <h2>Welcome Back!</h2>
+          <p class="modal-subtitle">Sign in to continue to your dashboard</p>
+          <div class="login-form">
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input
+                type="text"
+                id="username"
+                placeholder="Enter your username"
+                value="rahul_sharma"
+              />
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+                value="password123"
+              />
+            </div>
+            <button class="login-btn">
+              <i class="fas fa-sign-in-alt"></i>
+              Sign In
+            </button>
+            <p class="forgot-password">Forgot Password?</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Bar -->
+      <nav class="navbar">
+        <div class="logo">
+          <i class="fas fa-truck-moving"></i>
+          <span>LoadMatch</span>
+        </div>
+        <div class="nav-links" id="navLinks">
+          <a href="#" class="active">Home</a>
+          <a href="#">About</a>
+          <a href="#">Contact</a>
+          <button class="nav-signin-btn">
+            <i class="fas fa-user"></i>
+            Sign In
+          </button>
+        </div>
+      </nav>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Auth Section -->
+        <section id="authSection" class="auth-section hidden">
+          <div class="auth-container">
+            <h1>Welcome to LoadMatch</h1>
+            <p class="subtitle">
+              Connect with empty trucks and optimize your logistics
+            </p>
+            <div class="auth-buttons">
+              <button class="auth-btn email-btn" id="emailLoginBtn">
+                <i class="fas fa-envelope"></i>
+                Sign in with Email
+              </button>
+              <button class="auth-btn phone-btn" id="otpLoginBtn">
+                <i class="fas fa-phone"></i>
+                Sign in with Phone (OTP)
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- User Selection Section -->
+        <section id="userSelectionSection" class="hidden">
+          <div class="selection-container">
+            <h2>Choose Your Role</h2>
+            <div class="role-cards">
+              <div class="role-card" id="truckDriverBtn">
+                <i class="fas fa-truck"></i>
+                <h3>Truck Driver</h3>
+                <p>Find loads for your empty truck</p>
+              </div>
+              <div class="role-card" id="shipperBtn">
+                <i class="fas fa-boxes"></i>
+                <h3>Shipper</h3>
+                <p>Find available trucks for your cargo</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Vehicle & Cargo Details Section -->
+        <section id="vehicleDetailsSection" class="hidden">
+          <div class="details-container">
+            <h2>Enter Your Details</h2>
+            <div class="details-form">
+              <!-- Vehicle Details -->
+              <div class="form-section">
+                <h3><i class="fas fa-truck"></i> Vehicle Information</h3>
+                <div class="form-group">
+                  <label for="vehicleType">Vehicle Type</label>
+                  <select id="vehicleType" class="form-control">
+                    <option value="">Select Vehicle Type</option>
+                    <option value="pickup">Pickup Truck (Tata Ace)</option>
+                    <option value="van">Van (Mahindra Supro)</option>
+                    <option value="small_truck">Small Truck (Tata 407)</option>
+                    <option value="medium_truck">
+                      Medium Truck (Ashok Leyland Dost)
+                    </option>
+                    <option value="large_truck">
+                      Large Truck (BharatBenz 1617R)
+                    </option>
+                    <option value="semi_truck">Semi Truck (Tata Prima)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="vehicleCapacity">Vehicle Capacity (kg)</label>
+                  <input
+                    type="number"
+                    id="vehicleCapacity"
+                    placeholder="Enter maximum load capacity"
+                    value="7500"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="vehicleDimensions"
+                    >Vehicle Dimensions (L x W x H in meters)</label
+                  >
+                  <div class="dimensions-input">
+                    <input
+                      type="number"
+                      id="vehicleLength"
+                      placeholder="Length"
+                      value="7.2"
+                    />
+                    <input
+                      type="number"
+                      id="vehicleWidth"
+                      placeholder="Width"
+                      value="2.5"
+                    />
+                    <input
+                      type="number"
+                      id="vehicleHeight"
+                      placeholder="Height"
+                      value="2.8"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Cargo Details -->
+              <div class="form-section">
+                <h3><i class="fas fa-box"></i> Cargo Information</h3>
+                <div class="form-group">
+                  <label for="cargoType">Cargo Type</label>
+                  <select id="cargoType" class="form-control">
+                    <option value="">Select Cargo Type</option>
+                    <option value="general">
+                      General Goods (Textiles, Electronics)
+                    </option>
+                    <option value="fragile">
+                      Fragile Items (Glass, Ceramics)
+                    </option>
+                    <option value="perishable">
+                      Perishable Goods (Fruits, Vegetables)
+                    </option>
+                    <option value="hazardous">
+                      Hazardous Materials (Chemicals)
+                    </option>
+                    <option value="oversized">
+                      Oversized Load (Machinery, Equipment)
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="cargoWeight">Cargo Weight (kg)</label>
+                  <input
+                    type="number"
+                    id="cargoWeight"
+                    placeholder="Enter cargo weight"
+                    value="5000"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="cargoDimensions"
+                    >Cargo Dimensions (L x W x H in meters)</label
+                  >
+                  <div class="dimensions-input">
+                    <input
+                      type="number"
+                      id="cargoLength"
+                      placeholder="Length"
+                      value="6.5"
+                    />
+                    <input
+                      type="number"
+                      id="cargoWidth"
+                      placeholder="Width"
+                      value="2.2"
+                    />
+                    <input
+                      type="number"
+                      id="cargoHeight"
+                      placeholder="Height"
+                      value="2.5"
+                    />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="specialRequirements">Special Requirements</label>
+                  <textarea
+                    id="specialRequirements"
+                    placeholder="Any special handling requirements or notes..."
+                  >
+Requires temperature control between 15-25°C. Loading from Mumbai warehouse to Delhi distribution center.</textarea
+                  >
+                </div>
+              </div>
+
+              <button class="submit-btn" id="submitDetailsBtn">
+                <i class="fas fa-check"></i>
+                Submit Details
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Dashboard Section -->
+        <section id="dashboardSection" class="hidden">
+          <div class="dashboard-container">
+            <div class="dashboard-header">
+              <h2>Dashboard</h2>
+              <div class="user-info">
+                <i class="fas fa-user-circle"></i>
+                <span>Welcome, User</span>
+              </div>
+            </div>
+
+            <div class="dashboard-grid">
+              <div class="dashboard-card" id="availableLoads">
+                <i class="fas fa-clipboard-list"></i>
+                <h3>Available Loads</h3>
+                <p>Find loads for your truck</p>
+              </div>
+              <div class="dashboard-card" id="availableTrucks">
+                <i class="fas fa-truck-loading"></i>
+                <h3>Available Trucks</h3>
+                <p>Find trucks for your cargo</p>
+              </div>
+            </div>
+
+            <div class="dashboard-actions">
+              <button class="action-btn" id="profileBtn">
+                <i class="fas fa-user-cog"></i>
+                Profile & Settings
+              </button>
+              <button class="action-btn" id="tripHistoryBtn">
+                <i class="fas fa-history"></i>
+                Trip History
+              </button>
+              <button class="action-btn" id="earningsBtn">
+                <i class="fas fa-chart-line"></i>
+                Earnings Tracker
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Profile Section -->
+        <section id="profileSection" class="hidden">
+          <div class="profile-container">
+            <h2>Profile & Settings</h2>
+            <div class="profile-form">
+              <div class="form-group">
+                <label for="truckDetails">Truck Details</label>
+                <input
+                  type="text"
+                  id="truckDetails"
+                  placeholder="Enter truck details..."
+                />
+              </div>
+              <button class="save-btn" id="saveProfileBtn">Save Changes</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Earnings Section -->
+        <section id="earningsSection" class="hidden">
+          <div class="earnings-container">
+            <h2>Earnings Overview</h2>
+            <div class="earnings-card">
+              <i class="fas fa-dollar-sign"></i>
+              <h3>Total Earnings</h3>
+              <p id="earningsInfo">$0.00</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Trip History Section -->
+        <section id="tripHistorySection" class="hidden">
+          <div class="trip-history-container">
+            <h2>Trip History</h2>
+            <div class="trip-list">
+              <div class="trip-item">
+                <i class="fas fa-check-circle"></i>
+                <div class="trip-info">
+                  <h4>Trip #1234</h4>
+                  <p>Completed - 2 days ago</p>
+                </div>
+              </div>
+              <div class="trip-item">
+                <i class="fas fa-check-circle"></i>
+                <div class="trip-info">
+                  <h4>Trip #1235</h4>
+                  <p>Completed - 5 days ago</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Map Section -->
+        <section id="mapSection" class="map-container">
+          <div class="map-header">
+            <h2>Track Your Route</h2>
+            <div class="location-inputs">
+              <div class="location-input">
+                <i class="fas fa-map-marker-alt pickup"></i>
+                <input
+                  type="text"
+                  id="pickupLocation"
+                  placeholder="Enter pickup location"
+                  value="Mumbai Central Station"
+                />
+              </div>
+              <div class="location-input">
+                <i class="fas fa-map-marker-alt drop"></i>
+                <input
+                  type="text"
+                  id="dropLocation"
+                  placeholder="Enter drop location"
+                  value="Delhi Railway Station"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Dummy Map Container -->
+          <div class="dummy-map">
+            <div class="map-background">
+              <div class="route-line"></div>
+              <div class="truck-marker">
+                <i class="fas fa-truck-moving"></i>
+                <span class="truck-status">In Transit</span>
+              </div>
+            </div>
+            <div class="map-overlay">
+              <div class="route-info">
+                <div class="route-marker pickup">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <span>Pickup: Mumbai</span>
+                </div>
+                <div class="route-marker drop">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <span>Drop: Delhi</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="map-actions">
+            <button class="action-btn">
+              <i class="fas fa-search"></i>
+              Find Available Trucks
+            </button>
+            <div class="estimated-info">
+              <div class="info-item">
+                <i class="fas fa-clock"></i>
+                <span>Estimated Time: 24 hours</span>
+              </div>
+              <div class="info-item">
+                <i class="fas fa-rupee-sign"></i>
+                <span>Estimated Cost: ₹25,000</span>
+              </div>
+              <div class="info-item">
+                <i class="fas fa-road"></i>
+                <span>Distance: 1,400 km</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Available Trucks Section -->
+        <section id="availableTrucksSection" class="hidden">
+          <div class="trucks-container">
+            <h2>Available Trucks</h2>
+            <div class="trucks-list">
+              <div class="truck-card">
+                <div class="truck-info">
+                  <i class="fas fa-truck"></i>
+                  <div class="truck-details">
+                    <h3>Tata 407</h3>
+                    <p>Capacity: 7500 kg</p>
+                    <p>Driver: Rajesh Kumar</p>
+                    <p>Rating: 4.8 ★</p>
+                  </div>
+                </div>
+                <div class="truck-actions">
+                  <button class="book-btn">
+                    <i class="fas fa-calendar-check"></i>
+                    Book Now
+                  </button>
+                </div>
+              </div>
+              <div class="truck-card">
+                <div class="truck-info">
+                  <i class="fas fa-truck"></i>
+                  <div class="truck-details">
+                    <h3>Ashok Leyland Dost</h3>
+                    <p>Capacity: 6000 kg</p>
+                    <p>Driver: Amit Singh</p>
+                    <p>Rating: 4.6 ★</p>
+                  </div>
+                </div>
+                <div class="truck-actions">
+                  <button class="book-btn">
+                    <i class="fas fa-calendar-check"></i>
+                    Book Now
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <p>&copy; 2024 LoadMatch. All rights reserved.</p>
+      </footer>
     </div>
 
-    <!-- User Selection Section -->
-    <div id="userSelectionSection" class="hidden">
-        <h2>Select User Type</h2>
-        <button id="truckDriverBtn">Truck Driver</button>
-        <button id="shipperBtn">Shipper</button>
-    </div>
-
-    <!-- Dashboard Section -->
-    <div id="dashboardSection" class="hidden">
-        <h2>Dashboard</h2>
-        <div id="availableLoads">Available Loads for Truck Drivers</div>
-        <div id="availableTrucks">Available Trucks for Shippers</div>
-        <button id="profileBtn">Profile & Settings</button>
-        <button id="tripHistoryBtn">Trip History</button>
-        <button id="earningsBtn">Earnings Tracker</button>
-    </div>
-
-    <!-- Profile & Settings Section -->
-    <div id="profileSection" class="hidden">
-        <h2>Profile & Settings</h2>
-        <label for="truckDetails">Truck Details:</label>
-        <input type="text" id="truckDetails" placeholder="Enter truck details...">
-        <button id="saveProfileBtn">Save</button>
-    </div>
-
-    <!-- Earnings Tracker Section -->
-    <div id="earningsSection" class="hidden">
-        <h2>Earnings Tracker</h2>
-        <p id="earningsInfo">Total Earnings: $0</p>
-    </div>
-
-    <!-- Trip History Section -->
-    <div id="tripHistorySection" class="hidden">
-        <h2>Trip History</h2>
-        <ul id="tripHistoryList">
-            <li>Trip 1 - Completed</li>
-            <li>Trip 2 - Completed</li>
-        </ul>
-    </div>
-
-    <!-- Map Section -->
-    <div id="mapSection">
-        <h3>Track Your Route</h3>
-        <div id="map" style="height: 300px; border-radius: 8px;"></div>
-    </div>
-
-    <!-- Google Maps API for Route Optimization -->
+    <!-- Google Maps API -->
     <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places"></script>
     <script src="app.js"></script>
-</body>
+  </body>
 </html>
